@@ -10,7 +10,8 @@ echo %1
 for %%a in (*.bat) do (
 	if not %%~na==Regist (
 		echo "register right click"
-		REG ADD HKEY_CLASSES_ROOT\SystemFileAssociations\.md\shell\md_to_html\command /f  /d \"%cd%\%%a\"\"%%1\"
+		echo \"%cd%\%%a\"\"%%1\"
+		REG ADD HKEY_CLASSES_ROOT\SystemFileAssociations\.md\shell\md_to_html\command /f  /d \"%cd%\%%a\"\"%%1\";%cd%
 		echo "check"
 		REG QUERY HKEY_CLASSES_ROOT\SystemFileAssociations\.md\shell\md_to_html\command
 	)

@@ -1,26 +1,31 @@
 @echo off
 
-set BatRootPath=C:\Users\HQ\Desktop\test\md-to-HTML\
+
 chcp 65001
-SET oriFile=%~n1
+set oriFile=%~n1
+set BatRootPath=%2
 
 echo "rename target file"
-SET file=youreoiuwoeiru
+set file=youreoiuwoeiru
+
+echo %oriFile%.md
+echo %file%.md
 move %oriFile%.md %file%.md
 
 echo "delete preview dir and %oriFile% dir"
 if exist "preview" (
 	rd "preview" /s /q
 )
-if exist "%BatRootPath%%oriFile%" (
-	rd "%BatRootPath%%oriFile%" /s /q
+if exist "%BatRootPath%\%oriFile%" (
+	rd "%BatRootPath%\%oriFile%" /s /q
 )
 
 echo "md to html ..."
 call i5ting_toc -f %file%.md
-md "%BatRootPath%%oriFile%"
-xcopy "%BatRootPath%selftype" "%BatRootPath%%oriFile%" /s /q /h /c /y
-copy "preview\%file%.html"  "%BatRootPath%%oriFile%\%file%.html"
+md "%BatRootPath%\%oriFile%"
+xcopy "%BatRootPath%\selftype" "%BatRootPath%\%oriFile%" /s /q /h /c /y
+copy "preview\%file%.html"  "%BatRootPath%\%oriFile%\%file%.html"
+
 rd preview /s /q
 
 echo "rename back md"
@@ -29,8 +34,8 @@ move %file%.md %oriFile%.md
 echo "change title"
 set str1="    ^<title^>大家养老标准中台第三方对接文档^</title^>"
 set str2="		^<link rel="shortcut icon" href="./toc/favicon.png"^>"
-set roothtml=%BatRootPath%%oriFile%\%file%.html
-set rootresult=%BatRootPath%%oriFile%\%oriFile%.html
+set roothtml=%BatRootPath%\%oriFile%\%file%.html
+set rootresult=%BatRootPath%\%oriFile%\%oriFile%.html
 (
 	for /f "tokens=1* delims=" %%a in (%roothtml%) do (
 		echo=%%a
@@ -67,7 +72,10 @@ if exist "%oriFile%" (
 	rd "%oriFile%" /s /q
 )
 md "%oriFile%"
-xcopy "%BatRootPath%%oriFile%" "%oriFile%" /s /q /h /c /y
+xcopy "%BatRootPath%\%oriFile%" "%oriFile%" /s /q /h /c /y
+if exist "%BatRootPath%\%oriFile%" (
+	rd "%BatRootPath%\%oriFile%" /s /q
+)
 
 echo "complete"
 
