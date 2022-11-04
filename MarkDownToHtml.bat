@@ -32,7 +32,7 @@ echo "rename back md"
 move %file%.md %oriFile%.md
 
 echo "change title"
-set str1="    ^<title^>大家养老标准中台第三方对接文档^</title^>"
+set str1="    ^<title^>%oriFile%^</title^>"
 set str2="		^<link rel="shortcut icon" href="./toc/favicon.png"^>"
 set roothtml=%BatRootPath%\%oriFile%\%file%.html
 set rootresult=%BatRootPath%\%oriFile%\%oriFile%.html
