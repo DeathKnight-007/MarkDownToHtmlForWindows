@@ -1,7 +1,6 @@
-@echo off
-
 echo "get administer power"
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
+
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~f0 ::","","runas",1)(window.close)&&exit
 cd /d "%~dp0"
 
 echo "get bat"
@@ -18,19 +17,3 @@ for %%a in (*.bat) do (
 )
 
 pause
-
-rem 注册表
-rem 	REG Operation [Parameter List]
-rem 操作
-rem 	QUERY
-rem 	ADD
-rem 	DELETE
-rem 	COPY
-rem 	SAVE
-rem 	RESTORE
-rem 	LOAD
-rem 	UNLOAD
-rem 	COMPARE
-rem 	EXPORT
-rem 	IMPORT
-rem 	FLAGS
